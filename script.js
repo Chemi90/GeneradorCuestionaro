@@ -1,7 +1,8 @@
 // Variables globales
 let timerInterval = null;
-let timeRemaining = 600; // 10 minutos en segundos
+let timeRemaining = 600; // Valor por defecto para "Con temporizador" (10 minutos)
 let isTimedQuiz = false;
+let quizMode = '';  // 'timed', 'untimed' o 'simulation'
 
 // Función para formatear el tiempo en mm:ss
 function formatTime(seconds) {
@@ -38,7 +39,8 @@ function hideLoadingOverlay() {
 // Función para cargar las preguntas del cuestionario
 function loadQuiz() {
   showLoadingOverlay();
-  fetch('https://josemiguelruizguevara.com:5000/generate_questions')
+  // Se envía el modo seleccionado como parámetro
+  fetch(`https://josemiguelruizguevara.com:5000/generate_questions?mode=${quizMode}`)
     .then(response => response.json())
     .then(data => {
       hideLoadingOverlay();
@@ -52,7 +54,7 @@ function loadQuiz() {
         return;
       }
       displayQuestions(data.questions);
-      // Si es un quiz con tiempo, inicia el temporizador
+      // Si es un quiz con temporizador (timed o simulation), inicia el temporizador
       if (isTimedQuiz) {
         startTimer();
       }
@@ -68,6 +70,13 @@ function loadQuiz() {
 function displayQuestions(questions) {
   const container = document.getElementById('questions-container');
   container.innerHTML = '';
+
+  // Información adicional para la simulación del examen
+  if (quizMode === 'simulation') {
+    const info = document.createElement('p');
+    info.textContent = 'Simulación del Examen: 25 preguntas repartidas en 5 tareas. Responde correctamente al menos 15 preguntas para ser apto.';
+    container.appendChild(info);
+  }
   
   questions.forEach((q, index) => {
     const questionDiv = document.createElement('div');
@@ -89,7 +98,6 @@ function displayQuestions(questions) {
       label.appendChild(input);
       label.appendChild(document.createTextNode(' ' + option));
       optionsDiv.appendChild(label);
-      optionsDiv.appendChild(document.createElement('br'));
     });
     
     questionDiv.appendChild(optionsDiv);
@@ -141,9 +149,47 @@ function submitQuiz() {
     });
   }
   
+  // En modo simulación se muestra si el candidato es apto (mínimo 15 correctas)
+  if (quizMode === 'simulation') {
+    if (correctCount >= 15) {
+      resultHtml += `<p><strong>Resultado: Apto</strong></p>`;
+    } else {
+      resultHtml += `<p><strong>Resultado: No apto</strong></p>`;
+    }
+  }
+  
+  // Agregar botón para reiniciar el cuestionario
+  resultHtml += `<button id="restart-quiz">Volver a intentar</button>`;
+  
   document.getElementById('results').innerHTML = resultHtml;
   // Ocultar el formulario y el temporizador
   document.getElementById('quiz-form').style.display = 'none';
+  document.getElementById('timer').style.display = 'none';
+  
+  // Listener para reiniciar
+  document.getElementById('restart-quiz').addEventListener('click', resetQuiz);
+}
+
+function resetQuiz() {
+  clearInterval(timerInterval);
+  
+  // Reiniciar el tiempo según el modo seleccionado
+  if (quizMode === 'timed') {
+    timeRemaining = 600;
+  } else if (quizMode === 'simulation') {
+    timeRemaining = 2700;
+  } else {
+    timeRemaining = 0;
+  }
+  
+  // Limpiar resultados y restablecer el formulario
+  document.getElementById('results').innerHTML = "";
+  document.getElementById('quiz-form').reset();
+  document.getElementById('quiz-form').style.display = 'none';
+  
+  // Mostrar nuevamente la selección de tipo de cuestionario y ocultar el botón de cargar
+  document.getElementById('quiz-type-selection').style.display = 'block';
+  document.getElementById('load-quiz').style.display = 'none';
   document.getElementById('timer').style.display = 'none';
 }
 
@@ -155,13 +201,24 @@ document.getElementById('quiz-form').addEventListener('submit', function(e) {
 
 // Listener para la selección de tipo de cuestionario
 document.getElementById('timed-quiz').addEventListener('click', function() {
+  quizMode = 'timed';
   isTimedQuiz = true;
+  timeRemaining = 600; // 10 minutos
   document.getElementById('load-quiz').style.display = 'block';
   loadQuiz();
 });
 
 document.getElementById('untimed-quiz').addEventListener('click', function() {
+  quizMode = 'untimed';
   isTimedQuiz = false;
+  document.getElementById('load-quiz').style.display = 'block';
+  loadQuiz();
+});
+
+document.getElementById('simulation-quiz').addEventListener('click', function() {
+  quizMode = 'simulation';
+  isTimedQuiz = true;
+  timeRemaining = 2700; // 45 minutos
   document.getElementById('load-quiz').style.display = 'block';
   loadQuiz();
 });

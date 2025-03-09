@@ -1,10 +1,9 @@
-/* Nuevo style.css */
 :root {
     --primary-color: #34495e;       /* Azul gris oscuro */
-    --accent-color:  #c0392b;       /* Rojo suave */
-    --background-color: #f5f5f5;     /* Fondo gris muy claro */
-    --container-bg:   #ffffff;       /* Contenedor blanco */
-    --text-color:     #2c3e50;       /* Texto en gris oscuro */
+    --accent-color:  #c0392b;        /* Rojo suave */
+    --background-color: #f5f5f5;      /* Fondo gris muy claro */
+    --container-bg:   #ffffff;        /* Contenedor blanco */
+    --text-color:     #2c3e50;        /* Texto en gris oscuro */
     --button-bg:      var(--accent-color);
     --button-hover-bg: #a93226;
     --link-color:     #2980b9;
