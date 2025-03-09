@@ -4,8 +4,39 @@
     <meta charset="UTF-8">
     <title>Quiz de PDF</title>
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Código de AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8616925081341898"
-     crossorigin="anonymous"></script>
+         crossorigin="anonymous"></script>
+    
+    <!-- CookieConsent CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+
+    <!-- CookieConsent JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+    
+    <!-- Configuración del CMP -->
+    <script>
+      window.addEventListener("load", function(){
+          window.cookieconsent.initialise({
+              "palette": {
+                  "popup": {
+                      "background": "#000"  // Color de fondo del popup
+                  },
+                  "button": {
+                      "background": "#f1d600"  // Color del botón de aceptación
+                  }
+              },
+              "theme": "classic",
+              "content": {
+                  "message": "Utilizamos cookies para mejorar su experiencia en este sitio. Puede editar, cambiar o personalizar este mensaje en Ajustes en cualquier momento.",
+                  "dismiss": "Aceptar",
+                  "link": "Más información",
+                  "href": "/politica-de-cookies"  // Reemplaza con la URL de tu política de cookies
+              }
+          });
+      });
+    </script>
 </head>
 <body>
     <div class="container">
