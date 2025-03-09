@@ -1,53 +1,87 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Quiz de PDF</title>
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Código de AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8616925081341898"
-         crossorigin="anonymous"></script>
-    
-    <!-- CookieConsent CSS -->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cuestionario de Nacionalidad Española</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Código de AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8616925081341898"
+     crossorigin="anonymous"></script>
+  
+  <!-- CookieConsent CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
 
-    <!-- CookieConsent JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
-    
-    <!-- Configuración del CMP -->
-    <script>
-      window.addEventListener("load", function(){
-          window.cookieconsent.initialise({
-              "palette": {
-                  "popup": {
-                      "background": "#000"  // Color de fondo del popup
-                  },
-                  "button": {
-                      "background": "#f1d600"  // Color del botón de aceptación
-                  }
+  <!-- CookieConsent JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  
+  <!-- Configuración del CMP -->
+  <script>
+    window.addEventListener("load", function(){
+      window.cookieconsent.initialise({
+          "palette": {
+              "popup": {
+                  "background": "#000"
               },
-              "theme": "classic",
-              "content": {
-                  "message": "Utilizamos cookies para mejorar su experiencia en este sitio. Puede editar, cambiar o personalizar este mensaje en Ajustes en cualquier momento.",
-                  "dismiss": "Aceptar",
-                  "link": "Más información",
-                  "href": "/politica-de-cookies"  // Reemplaza con la URL de tu política de cookies
+              "button": {
+                  "background": "#f1d600"
               }
-          });
+          },
+          "theme": "classic",
+          "content": {
+              "message": "Utilizamos cookies para mejorar su experiencia en este sitio. Puede editar, cambiar o personalizar este mensaje en Ajustes en cualquier momento.",
+              "dismiss": "Aceptar",
+              "link": "Más información",
+              "href": "/politica-de-cookies.html"
+          }
       });
-    </script>
+    });
+  </script>
 </head>
 <body>
-    <div class="container">
-        <h1>Quiz de PDF</h1>
-        <button id="load-quiz">Cargar Preguntas</button>
-        <form id="quiz-form" style="display:none;">
-            <div id="questions-container"></div>
-            <button type="submit">Enviar Respuestas</button>
-        </form>
-        <div id="results"></div>
+  <!-- Loading overlay -->
+  <div id="loading-overlay">
+    <div id="loading-message">Cargando preguntas, por favor espere...</div>
+  </div>
+  
+  <div class="container">
+    <header>
+      <h1>Cuestionario de Nacionalidad Española</h1>
+      <p>Pon a prueba tus conocimientos sobre España y demuestra que cumples los requisitos para obtener la nacionalidad.</p>
+    </header>
+    
+    <!-- Selección de tipo de cuestionario -->
+    <div id="quiz-type-selection">
+      <h2>Elige el tipo de cuestionario:</h2>
+      <button id="timed-quiz">Con temporizador (10 minutos)</button>
+      <button id="untimed-quiz">Sin temporizador</button>
     </div>
-    <script src="script.js"></script>
+    
+    <!-- Temporizador, visible solo en el quiz con tiempo -->
+    <div id="timer" style="display: none;">Tiempo restante: <span id="time-remaining">10:00</span></div>
+    
+    <!-- Opcional: Contenedor de anuncios de AdSense -->
+    <ins class="adsbygoogle"
+         style="display:block; text-align:center;"
+         data-ad-layout="in-article"
+         data-ad-format="fluid"
+         data-ad-client="ca-pub-8616925081341898"
+         data-ad-slot="1234567890"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    
+    <!-- Botón de cargar preguntas (se mostrará cuando se seleccione un tipo de cuestionario) -->
+    <button id="load-quiz" style="display: none;">Cargar Preguntas</button>
+    
+    <!-- Formulario del cuestionario -->
+    <form id="quiz-form" style="display:none;">
+      <div id="questions-container"></div>
+      <button type="submit">Enviar Respuestas</button>
+    </form>
+    <div id="results"></div>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>
