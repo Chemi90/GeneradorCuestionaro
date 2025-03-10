@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cuestionario de Nacionalidad Española</title>
   <link rel="stylesheet" href="style.css">
-  
-  <!-- Código de AdSense -->
+
+  <!-- Código de AdSense (se cargará junto al contenido) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8616925081341898"
      crossorigin="anonymous"></script>
   
   <!-- CookieConsent CSS -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
   <!-- CookieConsent JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
   
@@ -21,12 +20,8 @@
     window.addEventListener("load", function(){
       window.cookieconsent.initialise({
           "palette": {
-              "popup": {
-                  "background": "#000"
-              },
-              "button": {
-                  "background": "#f1d600"
-              }
+              "popup": { "background": "#000" },
+              "button": { "background": "#f1d600" }
           },
           "theme": "classic",
           "content": {
@@ -40,49 +35,69 @@
   </script>
 </head>
 <body>
-  <!-- Loading overlay -->
-  <div id="loading-overlay">
-    <div id="loading-message">Cargando preguntas, por favor espere...</div>
-  </div>
+  <header>
+    <nav>
+      <ul>
+         <li><a href="index.html">Inicio</a></li>
+         <li><a href="#about">Acerca de</a></li>
+         <li><a href="#quiz">Cuestionario</a></li>
+         <li><a href="politica-de-cookies.html">Política de Cookies</a></li>
+      </ul>
+    </nav>
+    <h1>Cuestionario de Nacionalidad Española</h1>
+    <p>Pon a prueba tus conocimientos sobre España y descubre si cumples los requisitos para obtener la nacionalidad.</p>
+  </header>
+
+  <main>
+    <!-- Sección de contenido original y de valor -->
+    <section id="about">
+      <h2>Acerca de este sitio</h2>
+      <p>Este sitio ha sido diseñado para ofrecerte una experiencia interactiva y educativa. Aquí encontrarás un cuestionario con preguntas sobre la historia, cultura y normativa de España, elaborado con contenido original y útil para ayudarte a prepararte para el proceso de nacionalidad.</p>
+      <p>Nos esforzamos por brindarte información de calidad que te motive a aprender y a volver. ¡Explora, aprende y comparte tus resultados!</p>
+    </section>
+    
+    <!-- Sección del cuestionario -->
+    <section id="quiz">
+      <h2>Elige el tipo de cuestionario</h2>
+      <div id="quiz-type-selection">
+         <button id="timed-quiz">Con temporizador (10 minutos)</button>
+         <button id="untimed-quiz">Sin temporizador</button>
+         <button id="simulation-quiz">Simulación del Examen (45 minutos)</button>
+      </div>
+      <button id="load-quiz" style="display: none;">Cargar Preguntas</button>
+      
+      <div id="timer" style="display: none;">Tiempo restante: <span id="time-remaining">10:00</span></div>
+      
+      <form id="quiz-form" style="display: none;">
+         <div id="questions-container"></div>
+         <button type="submit">Enviar Respuestas</button>
+      </form>
+      
+      <div id="results"></div>
+      
+      <!-- Bloque de anuncios de AdSense integrado en contenido valioso -->
+      <div class="ad-section">
+         <ins class="adsbygoogle"
+             style="display:block; text-align:center;"
+             data-ad-layout="in-article"
+             data-ad-format="fluid"
+             data-ad-client="ca-pub-8616925081341898"
+             data-ad-slot="1234567890"></ins>
+         <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+         </script>
+      </div>
+    </section>
+  </main>
   
-  <div class="container">
-    <header>
-      <h1>Cuestionario de Nacionalidad Española</h1>
-      <p>Pon a prueba tus conocimientos sobre España y demuestra que cumples los requisitos para obtener la nacionalidad.</p>
-    </header>
-    
-    <!-- Selección de tipo de cuestionario -->
-    <div id="quiz-type-selection">
-      <h2>Elige el tipo de cuestionario:</h2>
-      <button id="timed-quiz">Con temporizador (10 minutos)</button>
-      <button id="untimed-quiz">Sin temporizador</button>
-      <button id="simulation-quiz">Simulación del Examen (45 minutos)</button>
-    </div>
-    
-    <!-- Temporizador, visible solo en el quiz con tiempo -->
-    <div id="timer" style="display: none;">Tiempo restante: <span id="time-remaining">10:00</span></div>
-    
-    <!-- Opcional: Contenedor de anuncios de AdSense -->
-    <ins class="adsbygoogle"
-         style="display:block; text-align:center;"
-         data-ad-layout="in-article"
-         data-ad-format="fluid"
-         data-ad-client="ca-pub-8616925081341898"
-         data-ad-slot="1234567890"></ins>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    
-    <!-- Botón de cargar preguntas (se mostrará cuando se seleccione un tipo de cuestionario) -->
-    <button id="load-quiz" style="display: none;">Cargar Preguntas</button>
-    
-    <!-- Formulario del cuestionario -->
-    <form id="quiz-form" style="display:none;">
-      <div id="questions-container"></div>
-      <button type="submit">Enviar Respuestas</button>
-    </form>
-    <div id="results"></div>
-  </div>
+  <footer>
+    <p>&copy; 2025 Cuestionario de Nacionalidad Española. Todos los derechos reservados.</p>
+    <p>
+      <a href="politica-de-cookies.html">Política de Cookies</a> | 
+      <a href="contacto.html">Contacto</a>
+    </p>
+  </footer>
+  
   <script src="script.js"></script>
 </body>
 </html>
